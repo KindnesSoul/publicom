@@ -1,6 +1,6 @@
 <?= $this->extend('layout') ?>
 
-<?= $this->section('content') ?>
+<?= $this->section('contenu') ?>
 
 <div class="container mt-4">
     <?php
@@ -29,7 +29,7 @@
                         <div class="card-body">
                             <h5 class="card-title"><?= esc($message['TITRE']) ?></h5>
                             <p class="card-text"><?= esc(substr($message['CONTENU'], 0, 100)) ?>...</p>
-                            <a href="/message/visualisation/<?= $message['id'] ?>" class="btn btn-info">
+                            <a href="/message/visualisation/<?= $message['ID'] ?>" class="btn btn-info">
                                 Voir le message
                             </a>
                         </div>
