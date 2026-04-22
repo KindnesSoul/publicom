@@ -12,7 +12,7 @@ class MessageModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['ID_COMMUNEMESSAGE', 'TITRE', 'CONTENU', 'POLICETITRE', 'POLICECONTENU', 'ALIGNEMENT', 'FOND', 'TAILLECONTENU', 'TAILLETITRE', 'PUBLIE', 'id_categorie'];
+    protected $allowedFields    = ['ID_COMMUNEMESSAGE',"ID_CATEGORIEMESSAGE", 'TITRE', 'CONTENU', 'POLICETITRE', 'POLICECONTENU', 'ALIGNEMENT', 'FOND', 'TAILLECONTENU', 'TAILLETITRE', 'PUBLIE', 'id_categorie'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

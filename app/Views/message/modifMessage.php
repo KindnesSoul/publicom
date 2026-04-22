@@ -62,6 +62,25 @@ $errors ??= session()->getFlashdata('errors');
             <p class="erreur"><?= esc($error) ?></p>
         <?php }} ?>
 
+        <label>Choisir une Categorie</label>
+        <select name="IDCATEGORIE" >
+            <?php if ($message["ID_CATEGORIEMESSAGE"]){ ?>
+
+                <option value="<?= $message["ID_CATEGORIEMESSAGE"] ?>"><?= $yourCategorie["NOM"] ?></option>
+            
+            <?php }else{ ?>
+                <option value="">-- Sélectionnez --</option>
+            <?php } ?>
+            
+            <?php
+                foreach($categories as $categorie){ ?>
+                    <option value="<?= $categorie["IDCATEGORIE"] ?>"><?= $categorie["NOM"] ?></option>
+
+                <?php
+                }
+                ?>
+        </select>
+
         <input type="submit" value="Valider">
     </fieldset>
 </form>

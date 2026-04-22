@@ -92,13 +92,14 @@ class Message extends BaseController
     {
         $communeModel = model('Commune');
 
-        return view('message/ajoutMessage', ['commune' => $communeModel->find($communeId), 'isAdmin' => true]);
+        return view('message/ajoutMessage', ['commune' => $communeModel->find($communeId), 'isAdmin' => true , "categories" => model('CategorieModel')->getAllCategorie()]);
     }
+
     public function create()
     {
         $messageModel = model('MessageModel');
         $communeModel = model('Commune');
-
+        //dd($this->request->getPost('IDCATEGORIE'));
         $validationRule = [
             'fond' => [
                 'label' => 'Image File',
@@ -138,6 +139,7 @@ class Message extends BaseController
 
                 $data = [
                     'ID_COMMUNEMESSAGE' => $this->request->getPost('idCommune'),
+                    'ID_CATEGORIEMESSAGE' => $this->request->getPost('IDCATEGORIE'),
                     'TITRE' => $this->request->getPost('titre'),
                     'CONTENU' => $this->request->getPost('message'),
                     'POLICETITRE' => $this->request->getPost('policeTitre'),
@@ -148,6 +150,7 @@ class Message extends BaseController
                     'TAILLETITRE' => $this->request->getPost('tailleTitre'),
                     'PUBLIE' => $this->request->getPost('publie'),
                     'FOND' => new File($filepath),
+                    
 
                 ];
 
@@ -159,6 +162,7 @@ class Message extends BaseController
        } else {
             $data = [
                 'ID_COMMUNEMESSAGE' => $this->request->getPost('idCommune'),
+                'ID_CATEGORIEMESSAGE' => $this->request->getPost('IDCATEGORIE'),
                 'TITRE' => $this->request->getPost('titre'),
                 'CONTENU' => $this->request->getPost('message'),
                 'POLICETITRE' => $this->request->getPost('policeTitre'),
@@ -168,6 +172,7 @@ class Message extends BaseController
                 'TAILLECONTENU' => $this->request->getPost('tailleTexte'),
                 'TAILLETITRE' => $this->request->getPost('tailleTitre'),
                 'PUBLIE' => $this->request->getPost('publie'),
+                
 
             ];
 
@@ -183,11 +188,12 @@ class Message extends BaseController
     {
         $messageModel = model('MessageModel');
         $communeModel = model('Commune');
+        $categorieModel=model('CategorieModel');
 
         $message = $messageModel->find($messageId);
         $commune = $communeModel->find($message['ID_COMMUNEMESSAGE']);
 
-        return view('message/modifMessage', ['message' => $message, 'commune' => $commune, 'isAdmin' => true]);
+        return view('message/modifMessage', ['message' => $message, 'commune' => $commune, 'isAdmin' => true, "categories" => $categorieModel->getAllCategorie(),"yourCategorie" =>$categorieModel->find($message["ID_CATEGORIEMESSAGE"])]);
     }
     public function update()
     {
@@ -246,6 +252,7 @@ class Message extends BaseController
 
 
             $data = [
+                'ID_CATEGORIEMESSAGE' => $this->request->getPost('IDCATEGORIE'),
                 'TITRE' => $this->request->getPost('titre'),
                 'CONTENU' => $this->request->getPost('message'),
                 'POLICETITRE' => $this->request->getPost('policeTitre'),
@@ -262,6 +269,7 @@ class Message extends BaseController
                 }
         } else {
             $data = [
+                'ID_CATEGORIEMESSAGE' => $this->request->getPost('IDCATEGORIE'),
                 'TITRE' => $this->request->getPost('titre'),
                 'CONTENU' => $this->request->getPost('message'),
                 'POLICETITRE' => $this->request->getPost('policeTitre'),

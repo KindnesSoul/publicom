@@ -37,4 +37,9 @@ class CategorieModel extends Model
         $messageModel = model('MessageModel');
         return $messageModel->where('ID_CATEGORIEMESSAGE', $categorieId)->findAll();
     }
+    public function getAllCategorie(){
+        return $this
+        -> select("IDCATEGORIE, NOM")
+        ->findAll();
+    }
 }

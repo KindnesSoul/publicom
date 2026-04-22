@@ -66,6 +66,17 @@ $errors ??= session()->getFlashdata('errors');
 
         <input name="publie" type="hidden" value=0 />
 
+        <label>Choisir une Categorie</label>
+        <select name="IDCATEGORIE" >
+            <option value="">-- Sélectionnez --</option>
+            <?php
+                foreach($categories as $categorie){ ?>
+                    <option value="<?= $categorie["IDCATEGORIE"] ?>"><?= $categorie["NOM"] ?></option>
+
+                <?php
+                }
+                ?>
+        </select>
         <input type="submit" value="Valider">
     </fieldset>
     <?= $this->endSection() ?>
