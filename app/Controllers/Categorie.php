@@ -80,7 +80,8 @@ class Categorie extends BaseController
     {
         $categorieModel = model('CategorieModel');
         $categorie = $categorieModel->find($id);
-        $messages = $categorieModel->getMessages($id);
+        
+        $messages = $categorieModel->getMessages($id,session()->get('IdCommune'));
 
         return view('categorie/messages', [
             'categorie' => $categorie,

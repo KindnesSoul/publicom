@@ -9,6 +9,7 @@
 $errors ??= session()->getFlashdata('errors');
 ?>
 
+
 <?= form_open_multipart('ajout-message') ?>
     <fieldset>
         <legend>Ajout de message de <?= $commune['NOM'] ?></legend>
@@ -67,8 +68,13 @@ $errors ??= session()->getFlashdata('errors');
         <input name="publie" type="hidden" value=0 />
 
         <label>Choisir une Categorie</label>
+        
+        <?php if (!empty($errors['CATEGORIE'])){ ?>
+            <p class="erreur"><?= esc($errors['CATEGORIE']) ?></p>
+        <?php } ?>
+
         <select name="IDCATEGORIE" >
-            <option value="">-- Sélectionnez --</option>
+            <option value="1">-- Sélectionnez --</option>
             <?php
                 foreach($categories as $categorie){ ?>
                     <option value="<?= $categorie["IDCATEGORIE"] ?>"><?= $categorie["NOM"] ?></option>
@@ -77,6 +83,7 @@ $errors ??= session()->getFlashdata('errors');
                 }
                 ?>
         </select>
+        
         <input type="submit" value="Valider">
     </fieldset>
     <?= $this->endSection() ?>

@@ -32,10 +32,10 @@ class CategorieModel extends Model
     ];
 
     // Méthode pour obtenir les messages d'une catégorie
-    public function getMessages($categorieId)
+    public function getMessages($categorieId,$CommuneId)
     {
         $messageModel = model('MessageModel');
-        return $messageModel->where('ID_CATEGORIEMESSAGE', $categorieId)->findAll();
+        return $messageModel->where('ID_CATEGORIEMESSAGE', $categorieId)->where("ID_COMMUNEMESSAGE", $CommuneId)->findAll();
     }
     public function getAllCategorie(){
         return $this

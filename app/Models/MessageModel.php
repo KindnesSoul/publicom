@@ -55,6 +55,9 @@ class MessageModel extends Model
         'TAILLETITRE' => [
             'required' => 'La taille de la police est obligatoire',
             'integer' => 'il ne faut utiliser que des chiffres pour la taille de la police'
+        ],
+        'CATEGORIE'=> [
+            'required'=> 'La taille de la police est obligatoire',
         ]
 
     ];

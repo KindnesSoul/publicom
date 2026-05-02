@@ -29,7 +29,7 @@
                         <div class="card-body">
                             <h5 class="card-title"><?= esc($message['TITRE']) ?></h5>
                             <p class="card-text"><?= esc(substr($message['CONTENU'], 0, 100)) ?>...</p>
-                            <a href="/message/visualisation/<?= $message['ID'] ?>" class="btn btn-info">
+                            <a class="bouton" href='<?= url_to('visu_message', $message['ID']) ?>'> Visualisation </a>
                                 Voir le message
                             </a>
                         </div>
