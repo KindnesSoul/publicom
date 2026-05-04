@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : dim. 03 mai 2026 à 18:53
+-- Généré le : lun. 04 mai 2026 à 08:44
 -- Version du serveur : 9.1.0
 -- Version de PHP : 8.3.14
 
@@ -20,7 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `publicomdb`
 --
-
+CREATE DATABASE IF NOT EXISTS `publicomdb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `publicomdb`;
 -- --------------------------------------------------------
 
 --
@@ -31,9 +32,9 @@ DROP TABLE IF EXISTS `admin`;
 CREATE TABLE IF NOT EXISTS `admin` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `IDENTIFIANT` char(32) DEFAULT NULL,
-  `MOTDEPASSE` char(72) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `MOTDEPASSE` char(72) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `admin`
@@ -54,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   `NOM` char(32) NOT NULL,
   `DESCRIPTION` char(255) DEFAULT NULL,
   PRIMARY KEY (`IDCATEGORIE`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `categorie`
@@ -75,9 +76,9 @@ CREATE TABLE IF NOT EXISTS `commune` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `NOM` char(32) DEFAULT NULL,
   `CODEPOSTAL` bigint DEFAULT NULL,
-  `DESCRIPTION` char(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `DESCRIPTION` char(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `commune`
@@ -110,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   PRIMARY KEY (`ID`),
   KEY `I_FK_MESSAGE_COMMUNE` (`ID_COMMUNEMESSAGE`),
   KEY `I_FK_MESSAGE_CATEGORIE` (`ID_CATEGORIEMESSAGE`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `message`
@@ -135,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `panneaux` (
   `LONGITUDE` decimal(10,5) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `I_FK_PANNEAUX_COMMUNE` (`ID_COMMUNEPANNEAUX`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `panneaux`
@@ -161,10 +162,10 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `PRENOM` char(32) DEFAULT NULL,
   `NOM` char(32) DEFAULT NULL,
   `IDENTIFIANT` char(32) DEFAULT NULL,
-  `MOTDEPASSE` char(72) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `MOTDEPASSE` char(72) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `I_FK_UTILISATEUR_COMMUNE` (`ID_UTILISATEURCOMMUNE`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `utilisateur`
