@@ -18,6 +18,7 @@ class Message extends BaseController
     {
         $messageModel = model('MessageModel');
         $communeModel = model('Commune');
+        
 
         $messageListe = $messageModel->where('ID_COMMUNEMESSAGE', $communeId)->findAll();
 
@@ -91,8 +92,9 @@ class Message extends BaseController
     public function ajout($communeId)
     {
         $communeModel = model('Commune');
+        $commercantModel=model('Commercant');
 
-        return view('message/ajoutMessage', ['commune' => $communeModel->find($communeId), 'isAdmin' => true , "categories" => model('CategorieModel')->getAllCategorie()]);
+        return view('message/ajoutMessage', ['commune' => $communeModel->find($communeId), 'isAdmin' => true , "categories" => model('CategorieModel')->getAllCategorie(),"commercants"=>model('Commercant')->getAllCommercant()]);
     }
 
     public function create()
@@ -136,23 +138,40 @@ class Message extends BaseController
                 $ext = $img->getClientExtension();
                 $img->move(ROOTPATH . 'public/uploads/', $fileName);
                 $filepath = 'uploads/' . $fileName;
+                if (getPost('id')!=0){
+                    $data = [
+                        'ID_COMMUNEMESSAGE' => $this->request->getPost('idCommune'),
+                        'ID_CATEGORIEMESSAGE' => $this->request->getPost('IDCATEGORIE'),
+                        'TITRE' => $this->request->getPost('titre'),
+                        'CONTENU' => $this->request->getPost('message'),
+                        'POLICETITRE' => $this->request->getPost('policeTitre'),
+                        'POLICECONTENU' => $this->request->getPost('policeTexte'),
+                        'ALIGNEMENT' => $this->request->getPost('alignement'),
+                        'FOND' => $this->request->getPost('fond'),
+                        'TAILLECONTENU' => $this->request->getPost('tailleTexte'),
+                        'TAILLETITRE' => $this->request->getPost('tailleTitre'),
+                        'PUBLIE' => $this->request->getPost('publie'),
+                        'DateLimite' => $this->request->getPost('DateLimite'),
+                        'FOND' => new File($filepath),
+                        
 
-                $data = [
-                    'ID_COMMUNEMESSAGE' => $this->request->getPost('idCommune'),
-                    'ID_CATEGORIEMESSAGE' => $this->request->getPost('IDCATEGORIE'),
-                    'TITRE' => $this->request->getPost('titre'),
-                    'CONTENU' => $this->request->getPost('message'),
-                    'POLICETITRE' => $this->request->getPost('policeTitre'),
-                    'POLICECONTENU' => $this->request->getPost('policeTexte'),
-                    'ALIGNEMENT' => $this->request->getPost('alignement'),
-                    'FOND' => $this->request->getPost('fond'),
-                    'TAILLECONTENU' => $this->request->getPost('tailleTexte'),
-                    'TAILLETITRE' => $this->request->getPost('tailleTitre'),
-                    'PUBLIE' => $this->request->getPost('publie'),
-                    'FOND' => new File($filepath),
-                    
-
-                ];
+                    ];
+                }else{
+                    $data = [
+                        'ID_COMMUNEMESSAGE' => $this->request->getPost('idCommune'),
+                        'ID_CATEGORIEMESSAGE' => $this->request->getPost('IDCATEGORIE'),
+                        'TITRE' => $this->request->getPost('titre'),
+                        'CONTENU' => $this->request->getPost('message'),
+                        'POLICETITRE' => $this->request->getPost('policeTitre'),
+                        'POLICECONTENU' => $this->request->getPost('policeTexte'),
+                        'ALIGNEMENT' => $this->request->getPost('alignement'),
+                        'FOND' => $this->request->getPost('fond'),
+                        'TAILLECONTENU' => $this->request->getPost('tailleTexte'),
+                        'TAILLETITRE' => $this->request->getPost('tailleTitre'),
+                        'PUBLIE' => $this->request->getPost('publie'),
+                        'FOND' => new File($filepath),
+                        ]
+                }
 
                 if ($messageModel->insert($data)===false){
                     return redirect()->back()->withInput()->with('errors', $messageModel->errors());
@@ -160,22 +179,40 @@ class Message extends BaseController
                 return redirect()->route('liste_messages', [$this->request->getPost('idCommune')]);
             } 
        } else {
-            $data = [
-                'ID_COMMUNEMESSAGE' => $this->request->getPost('idCommune'),
-                'ID_CATEGORIEMESSAGE' => $this->request->getPost('IDCATEGORIE'),
-                'TITRE' => $this->request->getPost('titre'),
-                'CONTENU' => $this->request->getPost('message'),
-                'POLICETITRE' => $this->request->getPost('policeTitre'),
-                'POLICECONTENU' => $this->request->getPost('policeTexte'),
-                'ALIGNEMENT' => $this->request->getPost('alignement'),
-                'FOND' => $this->request->getPost('fond'),
-                'TAILLECONTENU' => $this->request->getPost('tailleTexte'),
-                'TAILLETITRE' => $this->request->getPost('tailleTitre'),
-                'PUBLIE' => $this->request->getPost('publie'),
-                
+            if (getPost('id')!=0){
+                    $data = [
+                        'ID_COMMUNEMESSAGE' => $this->request->getPost('idCommune'),
+                        'ID_CATEGORIEMESSAGE' => $this->request->getPost('IDCATEGORIE'),
+                        'TITRE' => $this->request->getPost('titre'),
+                        'CONTENU' => $this->request->getPost('message'),
+                        'POLICETITRE' => $this->request->getPost('policeTitre'),
+                        'POLICECONTENU' => $this->request->getPost('policeTexte'),
+                        'ALIGNEMENT' => $this->request->getPost('alignement'),
+                        'FOND' => $this->request->getPost('fond'),
+                        'TAILLECONTENU' => $this->request->getPost('tailleTexte'),
+                        'TAILLETITRE' => $this->request->getPost('tailleTitre'),
+                        'PUBLIE' => $this->request->getPost('publie'),
+                        'DateLimite' => $this->request->getPost('DateLimite'),
+                        'FOND' => new File($filepath),
+                        
 
-            ];
-
+                    ];
+                }else{
+                    $data = [
+                        'ID_COMMUNEMESSAGE' => $this->request->getPost('idCommune'),
+                        'ID_CATEGORIEMESSAGE' => $this->request->getPost('IDCATEGORIE'),
+                        'TITRE' => $this->request->getPost('titre'),
+                        'CONTENU' => $this->request->getPost('message'),
+                        'POLICETITRE' => $this->request->getPost('policeTitre'),
+                        'POLICECONTENU' => $this->request->getPost('policeTexte'),
+                        'ALIGNEMENT' => $this->request->getPost('alignement'),
+                        'FOND' => $this->request->getPost('fond'),
+                        'TAILLECONTENU' => $this->request->getPost('tailleTexte'),
+                        'TAILLETITRE' => $this->request->getPost('tailleTitre'),
+                        'PUBLIE' => $this->request->getPost('publie'),
+                        'FOND' => new File($filepath),
+                        ]
+                }
             if ($messageModel->insert($data)===false){
                     return redirect()->back()->withInput()->with('errors', $messageModel->errors());
                 }

@@ -84,6 +84,27 @@ $errors ??= session()->getFlashdata('errors');
                 ?>
         </select>
         
+        
+        <label>Choisir un commercant si ce message est une  publicité :</label>
+        <select name="id" >
+            <option value="0">-- Sélectionnez --</option>
+            <?php
+                foreach($commercants as $commercant){ ?>
+                    <option value="<?= $commercant["id"] ?>"><?= $commercant["Libelle"] ?></option>
+
+                <?php
+                }
+                ?>
+        </select>
+        
+        
+
+        <label>date  limite de la  publicite :</label>
+        <input name="DateLimite" type="date">
+        
+        
+        
         <input type="submit" value="Valider">
+    
     </fieldset>
     <?= $this->endSection() ?>
